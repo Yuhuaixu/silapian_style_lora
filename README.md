@@ -5,6 +5,12 @@
 同时结合 IP-Adapter FaceID 技术，在生成过程中尽可能保留人物的面部特征，使得输出更贴近真实人物。
 
 
+📷 效果示例
+
+<img src="images/image3.png" width="400" alt="模型效果图">
+
+
+
 ✨ 功能亮点
 
 🎨 LoRA 微调：仅需 30 张撕拉片风格照片即可完成训练
@@ -86,9 +92,7 @@ one beautiful girl, silapian_style
 
 
 
-📷 效果示例
 
-在这里你可以放上训练前后的对比图、不同 checkpoint 的风格差异图
 
 📝 License
 
