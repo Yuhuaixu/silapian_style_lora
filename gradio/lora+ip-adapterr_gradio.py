@@ -234,7 +234,7 @@ def create_gradio_interface():
     interface = gr.Interface(
         fn=generate_wrapper,
         inputs=[
-            gr.Textbox(label="正向提示词", lines=3, value="silapian_style,a girl,white hair,portrait,masterpiece", placeholder="输入描述生成图像的提示词…"),
+            gr.Textbox(label="正向提示词", lines=3, value="silapian_style,a girl,white background,portrait,masterpiece", placeholder="输入描述生成图像的提示词…"),
             gr.Textbox(label="负向提示词", lines=2, value="blurry, ugly, deformed, grain, low-res, (worst quality:1.4)", placeholder="输入不希望出现的内容…"),
             gr.Image(label="参考人脸图像 (Face ID)", type="pil"),
             gr.Slider(label="LoRA 权重", minimum=0.0, maximum=2.0, value=1.0, step=0.1),
