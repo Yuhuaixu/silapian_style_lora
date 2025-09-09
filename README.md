@@ -43,6 +43,8 @@ dataset/
    
 🏋️‍♂️ 训练流程
 
+使用 [HuggingFace diffusers 官方 train_text_to_image_lora_sdxl.py 脚本](https://github.com/huggingface/diffusers/blob/main/examples/text_to_image/train_text_to_image_lora_sdxl.py) 进行 LoRA 训练。
+
 运行 LoRA 训练脚本（基于 diffusers 库）：
 
 
