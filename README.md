@@ -13,7 +13,7 @@
 
 Lora + ip-adapter
 
-<img src="images/image5.png" width="400" alt="模型效果图"><img src="images/image6.png" width="400" alt="模型效果图">
+<img src="images/example.png" width="400" alt="模型效果图"><img src="images/image6.png" width="400" alt="模型效果图">
 
 
 
