@@ -84,7 +84,7 @@ accelerate launch train_text_to_image_lora_sdxl.py \
 
 📥 LoRA 权重下载
 
-[HuggingFace 模型链接]((https://huggingface.co/yuhuaixu/silapian_style_lora))
+[HuggingFace 模型链接](https://huggingface.co/yuhuaixu/silapian_style_lora)
 
 
 🖼️ 推理生成
