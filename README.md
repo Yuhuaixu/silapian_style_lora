@@ -81,6 +81,12 @@ accelerate launch train_text_to_image_lora_sdxl.py \
 
 学习率 1e-4 对少量照片训练较稳定，可按需调整
 
+
+📥 LoRA 权重下载
+
+[HuggingFace 模型链接]((https://huggingface.co/yuhuaixu/silapian_style_lora))
+
+
 🖼️ 推理生成
 
 加载 SDXL 基础模型 和训练好的 LoRA 权重
