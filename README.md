@@ -1,74 +1,68 @@
-📷 撕拉片风格照片生成器
+# 📷 撕拉片风格照片生成器
 
-本项目基于 Stable Diffusion XL (SDXL) + LoRA 微调 实现撕拉片（Silapian Style）风格照片的训练与生成。
+本项目基于 **Stable Diffusion XL (SDXL)** + **LoRA 微调**，实现撕拉片（Silapian Style）风格照片的训练与生成。结合 **IP-Adapter FaceID** 和 **ControlNet** 技术，在生成过程中尽可能保留人物的面部和形体特征，使输出更贴近真实人物。
 
-同时结合 IP-Adapter FaceID 和 ControlNet 技术，在生成过程中尽可能保留人物的面部和形体特征，使得输出更贴近真实人物。
+---
 
+## 🎨 效果示例
 
-📷 效果示例
+**推荐参数：**  
+CFG = 4.0-6.0 | Steps = 20-35 | 调度器：dpmpp_2m + karras
 
-CFG = 4.0-6.0 ; Steps = 20-35 ; 调度器 dpmpp_2m + karras
+### 文生图
 
-文生图
+- **只用 LoRA**
 
-只用Lora
+  <img src="images/image3.png" width="400" alt="模型效果图">
 
-<img src="images/image3.png" width="400" alt="模型效果图">
+- **LoRA + IP-Adapter**
 
-Lora + ip-adapter
+  <img src="images/example.png" width="400" alt="模型效果图"><img src="images/image6.png" width="400" alt="模型效果图">
 
-<img src="images/example.png" width="400" alt="模型效果图"><img src="images/image6.png" width="400" alt="模型效果图">
+- **LoRA + IP-Adapter + ControlNet**
 
-Lora + IP-Adapter + ControlNet
+  <img src="images/example1.jpg" width="400" alt="模型效果图"><img src="images/image8.png" width="400" alt="模型效果图">
 
-<img src="images/example1.jpg" width="400" alt="模型效果图"><img src="images/image8.png" width="400" alt="模型效果图">
+### 图生图
 
-图生图
+- **LoRA + IP-Adapter + ControlNet**
 
-Lora + IP-Adapter + ControlNet
+  <img src="images/example1.jpg" width="400" alt="模型效果图"><img src="images/image7.png" width="400" alt="模型效果图">
 
-<img src="images/example1.jpg" width="400" alt="模型效果图"><img src="images/image7.png" width="400" alt="模型效果图">
+---
 
+## ✨ 功能亮点
 
+- **LoRA 微调**：仅需 30 张撕拉片风格照片即可完成训练
+- **FaceID 人脸还原**：保留目标人脸的细节与特征
+- **高分辨率支持**：支持 1024×1024 分辨率训练与推理
+- **独特艺术表现**：专注于撕拉片艺术风格，赋予图像生成更多创意
 
-✨ 功能亮点
+---
 
-🎨 LoRA 微调：仅需 30 张撕拉片风格照片即可完成训练
+## 📂 数据准备
 
-📷 FaceID 人脸还原：保留目标人脸的细节与特征
+1. 收集 30 张撕拉片风格照片（建议清晰、构图风格统一）
+2. 为每张图片编写对应的文本描述（caption），可使用 BLIP 批量生成
+3. 数据集目录示例：
 
-⚡ 高分辨率支持：模型支持 1024×1024 分辨率训练与推理
+   ```
+   dataset/
+     ├── img001.jpg
+     ├── img002.jpg
+     ├── ...
+     ├── data.csv   # 包含文件名与 caption
+   ```
 
-🎨 独特艺术表现**：专注于呈现独具匠心的撕拉片艺术风格，为图像生成注入创意。
+---
 
-📂 数据准备
+## 🏋️‍♂️ 训练流程
 
-1.收集 30 张撕拉片风格照片（建议清晰、构图风格统一）
+使用 [HuggingFace diffusers 官方 LoRA 训练脚本](https://github.com/huggingface/diffusers/blob/main/examples/text_to_image/train_text_to_image_lora_sdxl.py) 进行 LoRA 微调。
 
-2。为每张图片编写对应的文本描述（caption），可使用BLIP进行批量编写
+运行命令示例：
 
-3.数据集目录示例：
-
-
-
-dataset/
-
-   ├── img001.jpg
-   
-   ├── img002.jpg
-   
-   ├── ...
-   
-   ├── data.csv   # 包含文件名与caption
-   
-🏋️‍♂️ 训练流程
-
-使用 [HuggingFace diffusers 官方 train_text_to_image_lora_sdxl.py 脚本](https://github.com/huggingface/diffusers/blob/main/examples/text_to_image/train_text_to_image_lora_sdxl.py) 进行 LoRA 训练。
-
-运行 LoRA 训练脚本（基于 diffusers 库）：
-
-
-
+```bash
 accelerate launch train_text_to_image_lora_sdxl.py \
   --pretrained_model_name_or_path="基础模型路径" \
   --pretrained_vae_model_name_or_path="VAE路径" \
@@ -95,47 +89,48 @@ accelerate launch train_text_to_image_lora_sdxl.py \
   --validation_prompt="one beautiful girl, silapian_style" \
   --num_validation_images=1 \
   --validation_epochs=20
-  
-💡 小技巧
+```
 
-建议保存 10-15 个 checkpoint，方便对比效果并选择最佳模型
+**小技巧：**
+- 建议保存 10-15 个 checkpoint，方便对比效果并选择最佳模型
+- 学习率 1e-4 对少量照片训练较稳定，可按需调整
 
-学习率 1e-4 对少量照片训练较稳定，可按需调整
+---
 
+## 📥 LoRA 权重下载
 
-📥 LoRA 权重下载
+- [HuggingFace 模型链接](https://huggingface.co/yuhuaixu/silapian_style_lora)
 
-[HuggingFace 模型链接](https://huggingface.co/yuhuaixu/silapian_style_lora)
+---
 
+## 🖼️ 推理生成
 
-🖼️ 推理生成
+加载 [SDXL](https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0) 或 [SG161222/RealVisXL](https://huggingface.co/SG161222) 基础模型和训练好的 LoRA 权重。
 
-加载 [SDXL](https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0) 或 [SG161222/RealVisXL](https://huggingface.co/SG161222) 基础模型 和训练好的 LoRA 权重
+推理时在提示词中加入训练时的特殊 token，例如：
 
-在提示词中加入训练时的特殊 token，例如：
-
+```
 one beautiful girl, silapian_style
+```
 
-使用 IP-Adapter FaceID（提供参考人脸图片），在保持撕拉片风格的同时还原人脸特征
+- 使用 IP-Adapter FaceID（提供参考人脸图片），在保持撕拉片风格的同时还原人脸特征。
+- 使用 ControlNet 控制人物形态。
 
-使用control net控制人物形态
+---
 
+## 💣 已知不足和改进想法
 
-💣存在不足
+- 人脸一致性存在差距，单张照片难以很好还原面部特征。
+- 若对特定人物进行风格转换，建议训练人物专属 LoRA，可提升还原度。
+- 在 comfyui 的流程中使用 plusv2 版本，效果有所改善。
+- 后续将继续探索更优方式提升人脸一致性。
 
-在人脸一致性上存在差距，使用单张照片无法很好还原面部特征。
+---
 
-如果是对特定人物进行风格转换，或许可以训练一个人物Lora，这样还原度会比较好点。
-
-此外，在comfyui的流程中使用更新版本的plusv2，效果有所改善。
-
-后续将继续探索更好的方式去保证人脸一致性。
-
-
-
-📝 License
+## 📝 License
 
 本项目仅限研究与学习用途，禁止商业化使用。
+
 
 
 
