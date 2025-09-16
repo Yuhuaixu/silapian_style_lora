@@ -19,7 +19,7 @@ Lora + ip-adapter
 
 图生图 Lora + IP-Adapter + ControlNet
 
-<img src="images/example.png" width="400" alt="模型效果图">
+<img src="images/example.png" width="400" alt="模型效果图"><img src="images/image7.png" width="400" height="400" alt="模型效果图">
 
 
 
