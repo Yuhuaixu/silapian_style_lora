@@ -7,6 +7,8 @@
 
 📷 效果示例
 
+CFG = 4.0-6.0 ; Steps = 20-35 ; 调度器 dpmpp_2m + karras
+
 只用Lora
 
 <img src="images/image3.png" width="400" alt="模型效果图">
@@ -14,6 +16,10 @@
 Lora + ip-adapter
 
 <img src="images/example.png" width="400" alt="模型效果图"><img src="images/image6.png" width="400" alt="模型效果图">
+
+图生图 Lora + IP-Adapter + ControlNet
+
+<img src="images/example.png" width="400" alt="模型效果图">
 
 
 
@@ -81,6 +87,7 @@ accelerate launch train_text_to_image_lora_sdxl.py \
   --validation_prompt="one beautiful girl, silapian_style" \
   --num_validation_images=1 \
   --validation_epochs=20
+  
 💡 小技巧
 
 建议保存 10-15 个 checkpoint，方便对比效果并选择最佳模型
