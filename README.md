@@ -2,12 +2,14 @@
 
 本项目基于 Stable Diffusion XL (SDXL) + LoRA 微调 实现撕拉片（Silapian Style）风格照片的训练与生成。
 
-同时结合 IP-Adapter FaceID 技术，在生成过程中尽可能保留人物的面部特征，使得输出更贴近真实人物。
+同时结合 IP-Adapter FaceID 和 ControlNet 技术，在生成过程中尽可能保留人物的面部和形体特征，使得输出更贴近真实人物。
 
 
 📷 效果示例
 
 CFG = 4.0-6.0 ; Steps = 20-35 ; 调度器 dpmpp_2m + karras
+
+文生图
 
 只用Lora
 
@@ -17,9 +19,15 @@ Lora + ip-adapter
 
 <img src="images/example.png" width="400" alt="模型效果图"><img src="images/image6.png" width="400" alt="模型效果图">
 
-图生图 Lora + IP-Adapter + ControlNet
+Lora + IP-Adapter + ControlNet
 
-<img src="images/example.png" width="400" alt="模型效果图"><img src="images/image7.png" width="400" height="400" alt="模型效果图">
+<img src="images/example1.jpg" width="400" alt="模型效果图"><img src="images/image8.png" width="400" alt="模型效果图">
+
+图生图
+
+Lora + IP-Adapter + ControlNet
+
+<img src="images/example1.jpg" width="400" alt="模型效果图"><img src="images/image7.png" width="400" alt="模型效果图">
 
 
 
@@ -102,20 +110,20 @@ accelerate launch train_text_to_image_lora_sdxl.py \
 
 🖼️ 推理生成
 
-加载 SDXL 基础模型 和训练好的 LoRA 权重
+加载 [SDXL](https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0) 或 [SG161222/RealVisXL](https://huggingface.co/SG161222) 基础模型 和训练好的 LoRA 权重
 
 在提示词中加入训练时的特殊 token，例如：
-
-
 
 one beautiful girl, silapian_style
 
 使用 IP-Adapter FaceID（提供参考人脸图片），在保持撕拉片风格的同时还原人脸特征
 
+使用control net控制人物形态
+
 
 💣存在不足
 
-在人脸一致性上存在差距，无法很好还原面部特征。
+在人脸一致性上存在差距，使用单张照片无法很好还原面部特征。
 
 如果是对特定人物进行风格转换，或许可以训练一个人物Lora，这样还原度会比较好点。
 
