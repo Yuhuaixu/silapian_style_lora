@@ -13,7 +13,7 @@ CFG = 4.0-6.0 | Steps = 20-35 | 调度器：dpmpp_2m + karras
 
 - **只用 LoRA**
 
-  <img src="images/image3.png" width="400" alt="模型效果图">
+  <img src="images/image3.png" width="400" alt="模型效果图"><img src="images/image1.png" width="400" alt="模型效果图">
 
 - **LoRA + IP-Adapter**
 
